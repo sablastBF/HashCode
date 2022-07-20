@@ -1,0 +1,92 @@
+Problem: https://hashcode.hr/programmer-problem-solver/
+RJESENJE
+####################
+Nacin na koji sam rjesavo je taj da se stvaramo sva moguca stanja. 
+Po stanjima se krecemo Dijkstrinim algoritmom. Te kad smo iscrpli sve znamenke to stanje proglasimo rjesenjem.
+
+Da bi smo rjesili zadatak potrebno je umetati brojeve za desna na ljevo. 
+Posto postoji jako puno slucajeva i jako puno rubnih slucajeva, umjesto da upisujemo dirkektno brojeve 
+mi ce mo upisivati "X" sto je nekoznanica koja ce direktno rjesiti dio nase jednadbe.
+
+Primjer
+    Stanje 1.
+    123     123X
+    312  ->  312
+    456      456
+    Stanje 2.
+    123      123
+    312  -> 312X
+    456      456
+    Stanje 3.
+    123      123
+    312  ->  312
+    456     456X
+    Stanje 4.
+    123     123X
+    312  -> 312X
+    456      456
+
+    ITD ukupno 8 
+
+    Ako gledamo prvo Stanje i gledamo samo zadnji stupac dobijamo "X26". 
+    Mi X trebamo zamjeniti sa nekim brojem  tako da je X + 2 = 6;
+    Naravno to je 4. 
+    No postoje slucajevi koje su malo kompleksniji. Tipa
+    X + X = 4
+    Naravno svi znamo da bi to moglo biti 2 + 2 = 4, ali i 4 + 0 = 4 ili 3 + 1 = 4.
+    Ta rjesenja su ista i uzmemo bilo koje.
+    No 8 + 6 = 4 isto vrjedi, i daje "jedan dalje". Te se takve jednadve moraju gledai kao nova stanja.
+    Sto uvelike otezava implementaciju i potpunost implementacije. Kako ce mo biti sigurni da smo pokrili sve slucajeve.
+
+Nacin na koji sam jednadbe rjesi u programu je sljedeci. Generiram se validne moguce jednadbe sa 2 for petlje.
+Ukupno ih je 10 * 10 * 2. 10 izbora za prvi broj, 10 izbora za drugi i puta dva jer moramo sve isto napraviti al samo da imamo "jedan dalje".
+Tako dobijemo tipa 2 + 2 = 4, tj kod nas zapisano 224, ili 5 + 5 = 0, 550 kod nas.
+Sada iz svakog te validne jednadve generiramo sve moguce jednadbe kojoj bi ta validna bila rjesenja.
+Primjer 224 
+    Nas kod ce generirati 8 jednabi:
+        22X
+        2x4
+        x24
+        xx4
+        2xx
+        x2x
+        xxx
+        224
+Takav postupak nam je osigurao da necemo propustiti neke cudne rubne slucajeve.
+Tipa 999 je validno ako imamo jedan dalje.
+
+
+Sada nam jedan korak kojeg a to su prefiksne znamenke. I sto ako nam je jedan niz prazan.
+Ako nam je jedan niz prazan njega sam odlucio oznaciti sa "O" slovo O. 
+Te kada dode u jednadbu sam ga pretovorio u "0" brojku nula. 
+No nekad kad nam je niz prazan opet bi smo trebali moci umetati znamenku. 
+Tj u velikoj vecini sucajeva to se dogada. To sam rjesio tako da sam dodao lazni znak koji oznacava 
+da je to uistinu pocetak nekoznanica i oznacio je sa "P".
+Taj postuoak mi je omogucio da umecem znakove na pocetak i da imam mogucnost 
+da mi je niz prazan i da ta dva stanja zajedno odvojim.
+
+
+Za kraj bih samo htio ostaviti memoizaciju. Odnosno docicemo do istih tanja razlicitim putevima.
+Nema smisla da se ponovno granamo iz istog stanja. Kako razlikujemo svako stanje? Po ostatku brojeva
+i imali jedan vise. Dovoljno je voditi set u koji cemo umetati ostatak nasih brojeve i jedan vise.
+
+I zavrsna rijec. Imam stanja koja "nemaju smisla". 
+Tipa 
+    1       1X
+    1  ->   1X
+    3       3X
+Mi sa tri nepoznanice nismo nista napravili samo smo se pomaknuli. No ostavio sam ga jer doduse na prvi pogeld nema smisla
+mi MORAMO generirati sva stanja da bi smo dosli do najblizeg tako i njega. 
+I to nije optimalno rjesenje ali
+    1       19
+    1  ->   19
+    3       39
+    je ispravno rjesenje.
+
+#####################################################3
+Programi
+Imao sam dva pukusaja rjesavajuci ovaj zadatak. Ostavio sam firstAttempt.cpp cisto za uspomenu.
+
+Generirao sam automacke testove. Ne mogu testirati dali su to najmanji broj umetanja. 
+No moze testirati dali je jednadba ispravna te jeli broj koraka jednak broju koji je moj broj ispisao.
+Tester validator je u Pythonu jer brojevi znaju biti veliki pa nisam htio riskirat u C++ a i nije zahtjevan program.

@@ -253,7 +253,7 @@ void preProces(){
 int main(){
     string s;
     ifstream inFile;
-    inFile.open("in_test_1.txt");
+    inFile.open("in.txt");
     preProces();
     
     while(getline (inFile, s)){
