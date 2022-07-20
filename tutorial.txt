@@ -38,7 +38,7 @@ Primjer
     No 8 + 6 = 4 isto vrjedi, i daje "jedan dalje". Te se takve jednadve moraju gledai kao nova stanja.
     Sto uvelike otezava implementaciju i potpunost implementacije. Kako ce mo biti sigurni da smo pokrili sve slucajeve.
 
-Nacin na koji sam jednadbe rjesi u programu je sljedeci. Generiram se validne moguce jednadbe sa 2 for petlje.
+Nacin na koji sam jednadbe rjesio u programu je sljedeci. Generiram se validne moguce jednadbe sa dvije for petlje.
 Ukupno ih je 10 * 10 * 2. 10 izbora za prvi broj, 10 izbora za drugi i puta dva jer moramo sve isto napraviti al samo da imamo "jedan dalje".
 Tako dobijemo tipa 2 + 2 = 4, tj kod nas zapisano 224, ili 5 + 5 = 0, 550 kod nas.
 Sada iz svakog te validne jednadve generiramo sve moguce jednadbe kojoj bi ta validna bila rjesenja.
@@ -56,17 +56,16 @@ Takav postupak nam je osigurao da necemo propustiti neke cudne rubne slucajeve.
 Tipa 999 je validno ako imamo jedan dalje.
 
 
-Sada nam jedan korak kojeg a to su prefiksne znamenke. I sto ako nam je jedan niz prazan.
+Sada nam jedan korak ostaje a to su prefiksne znamenke. I sto ako nam je jedan niz prazan.
 Ako nam je jedan niz prazan njega sam odlucio oznaciti sa "O" slovo O. 
 Te kada dode u jednadbu sam ga pretovorio u "0" brojku nula. 
 No nekad kad nam je niz prazan opet bi smo trebali moci umetati znamenku. 
 Tj u velikoj vecini sucajeva to se dogada. To sam rjesio tako da sam dodao lazni znak koji oznacava 
-da je to uistinu pocetak nekoznanica i oznacio je sa "P".
-Taj postuoak mi je omogucio da umecem znakove na pocetak i da imam mogucnost 
+da je to uistinu pocetak nepoznanica i oznacio je sa "P".
+Taj postupsak mi je omogucio da umecem znakove na pocetak i da imam mogucnost 
 da mi je niz prazan i da ta dva stanja zajedno odvojim.
 
-
-Za kraj bih samo htio ostaviti memoizaciju. Odnosno docicemo do istih tanja razlicitim putevima.
+Za kraj bih samo htio ostaviti memoizaciju. Odnosno docicemo do istih stanja razlicitim putevima.
 Nema smisla da se ponovno granamo iz istog stanja. Kako razlikujemo svako stanje? Po ostatku brojeva
 i imali jedan vise. Dovoljno je voditi set u koji cemo umetati ostatak nasih brojeve i jedan vise.
 
